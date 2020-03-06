@@ -1,0 +1,25 @@
+Hello world, welcome to a new Tidalcycles tutorial.
+
+In this tutorial we will move our very first step inside of our livecoding enviroment and cover some basic principles that will be very useful later to fully understand our instrument.
+
+When we use TidalCycles we are connecting differents programs sending messages from one to another using the OSC (Opens sound control) protocol.
+This can be confusing at first becouse Tidal is not actually a program that you can open with your computer, is more like a library of instruction that are useful to control something.
+
+To set a proper livecoding set-up usign TidalCycles you'll need the following stuff:
+-An editor, wich is our interface to communicate with Tidal throught text, in my case I am using Atom wich I raccomend in general and especially for working with Tidal, but you can check all the supported editors in this section of the TidalCycles Userbase
+https://tidalcycles.org/index.php/List_of_tidal_editors
+The reason why I raccomend Atom, is beacouse it supports Tidal as an extention so it can be easily downloaded from the package installer, in some other editors this process can be more complicated.
+-Haskell, wich is the the programming language you'll be using when livecoding with Tidal and it's also the language in wich TidalCycles itself is written (you'll need to install the Haskell library otherwise the editor won't be able to undestand the code)
+-Supercollider, as we said before Tidal is just something that let us control something else, in the majority of cases this will be Supercollider. Supercollider is a huge text based programming enviroment that can be used for a extremly wide variety of purpose, mostly regarding sound synthesis and processing.
+Inside Supercollider we have Superdirt, this is the main instrument we control with Tidal that receives and intreprets the OSC messages sended by Tidal, here is where all the sound generation and process happens, infact until now the only thing we were doing was sending OSC messages, while here those are converted in real digital sound signal.
+
+This is the basic set-up for a LiveCoding performance with Tidal, but it all can be customize according to your necessities once you have understand how this system works and are familiar with the different parts.
+
+So let's make our very first TidalCycles project!
+In order to do this you'll need to have already install all the already mentioned stuff, you can find a guide to installation here
+https://tidalcycles.org/index.php/Installation
+
+First step is to open Supercollider, when the supercollider server is booted it will automaticly configure it's output to the output of your computer, so before starting supercollider you may want to set the output of your computer to the device you want supercollider to output audio. You can later set back the audio output of your computer to something else without affecting supercollider output. Once you have started Superdirt you can minimize the supercollider window since we won't need that anymore.
+You can also save this as your startup file, this means that next time you open supercollider this will be automaticly evaluated.
+
+Let's open our editor, here we will create a new project and save it with the .tidal extension, in this  way the editor will know that we are going to use the Tidal language
