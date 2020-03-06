@@ -1,0 +1,67 @@
+Hello world, welcome to a new Tidalcycles tutorial by Olbos and Nesso.
+
+In this video, we will cover some basic syntax for writing patterns with Tidal.
+
+The core concept of sequencing with Tidalcycles is the cycle, the unit of measurement of time. Every event in Tidal is related to the duration of the cycle, which generally stays fixed and has a default value of one cycle per second corresponding to 120 bpm.
+
+When we declare a pattern made of multiple events, those are evenly distributed in the duration of the cycle. For example
+
+d1 $ s "bd"
+
+d1 $ s "bd bd bd"
+
+As we can see, increasing the numbers of events corresponds to  more density, as the total duration of the pattern is fixed. This means that every event get shorter.
+
+Instead of writing down “bd” each time, we could use the exclamation point, for example
+
+d1 $ s "bd!4"
+
+Until now, everything is evenly distributed, but is possible to replace a single event with a group of events, enclosing them into square brackets
+
+d1 $ s "bd [bd sn]"
+
+We can get creative using square brackets, nesting them as much as we want to achieve complexity. For instance
+
+d1 $ s "[bd [bd sn]] sn"
+
+d1 $ s "bd [bd [sn sn] sn] [ ~ bd]"
+
+A shortcut for brackets is the point, but this doesn’t allow nesting.
+
+d1 $ s "bd sn . sn bd sn bd"
+
+d1 $ s "[bd sn] [sn bd sn bd]"
+
+
+d1 $ s "bd [sn sn sn]"
+
+Instead of writing down sn three times, we can simply write
+
+d1 $ s "bd sn*3"
+
+in this way the square brackets are implicit
+
+In order to create a pattern longer than one cycle, we can divide it by a number
+
+d1 $ s "[bd*3 sn*4 sn*5]/3"
+
+in this case the pattern "[bd*3 sn*4 sn*5]" has a total duration of three cycles
+
+It's interesting to try also floating numbers:
+
+d1 $ s "[bd*3 sn*4 sn*5]/1.33"
+
+If we want to play different samples every cycle, we enclose them in angle brackets
+
+d1 $ s "<bd cp> bottle"
+
+d1 $ s "<bd sn*3 cp*2> bottle"
+
+It's possible to randomly remove events from patterns using the question mark. This corresponds to a 50% of probability of removing the event.
+
+d1 $ s "sn cp bd?"
+
+the question mark can also be applied to groups of events
+
+d1 $ s "bd*16?"
+
