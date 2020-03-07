@@ -1,16 +1,70 @@
-Hi all welcome to our second tutorial on Tidalcycles
+Hello world welcome to our second tutorial on Tidalcycles
 
-In this tutorial we will explain some of the fundamentals of Tidal and start to write our first patterns.
+In this tutorial we will explain some of the fundamentals of Tidal and start to write our very first pattern.
 
 Let's start from this line of code wich is one of the simplest things you can write inside Tidal
 
 d1 $ sound "bd"
 
-The first character highlited in blue is d1 wich represent the first channel inside Superdirt, d2 represent the second one and so on.
+The first part highlited in blue is d1 wich represent a connection between Tidal and SuperDirt, we can also think d1 as the first channel inside SuperDirt while d2 represent the second one and so on.
 
-The second character is the dollar, to explain how the dollar works inside Tidal and Haskell you can consider that this to are the same
+The second character is the dollar, to explain how the dollar works inside Tidal and Haskell you can consider that this two are the same
 
-a $ b
-a (b)
+a $ b = a (b)
 
-So what the dollar does is actually to apply a function to something else
+
+The dollar is a substitude of the parenthesis that let us write code in a much more readable way
+
+a $ b $ c = a (b (c))
+
+What the dollar does is indicating that everything that follows is the last argument of the function preceding it, if this sounds confusing at first don't worry.
+
+In the last part of our code we have the keyword sound (that can be also shortened with just s) that is telling the program that what follows is a pattern (wich in our case is "bd") that is written inside quotes.
+
+When we write a pattern using Tidal we recall samples that are stored in a directory (this directory is definied when booting SuperDirt and has a default path that can be changed customizing your SuperDirt start up code). To access this directory you can type and evaluate the command Quarks.gui inside SuperCollider, then click on Dirt Samples and then on Open Folder.
+
+When we opend this directory we can se that the bd sample we recalled is not a single samples but instead a folder of samples. When we write just "bd" we are recalling the first samples, we could recal the second one using the synthax "bd:01" where :01 is used to give the index of the samples inside the directory starting from 0, so that "bd" and "bd:00" are the same.
+
+So now that we have analyzed our very first line of code inside Tidal let's clarify a few other important concepts before explaning how to write our patterns.
+
+To evaluate a line of code inside Tidal we can press shit+enter, if you try that on our first example
+d1 $ sound "bd"
+and you have correctly booted SuperCollider and SuperDirt (see the first tutorial if this confuses you)
+you will ear a kickdrum sound once every second.
+
+To stop Tidal from playing you can evaluate the message d1 silence that tells specifically to the channel 1 to stop sending messages, alternatively you can evaluate hush that will stop sending all messages in all channels (you can also use the shortcut shift+command+h on mac or shift+control+h on windows instead of evaluating hush).
+
+To evaluate multiple lines with one command you can press command+enter on mac or control+enter on windows. This will evaluate a block that includes all the adjacent lines (so it will start and ends when it finds and empty line). You can try it like this
+
+d1
+$
+sound
+"bd"
+
+It's important to leave an empty line before and after otherwise you will get an error most of the time since the program will evaluate a bigger portion of code then the one you wanted to be evaluated.
+
+Writing code on multiple lines and using the dollar instead of parenthesis (when possible!) are two useful way of keeping our code neat and readable.
+
+Another key concept inside Tidal is that messages sent to the same channel (d1,d2, ecc) ovveride the previous code while giving the new instructions.
+So for example if we evaluate this portion of code
+d1 $ s "bd"
+and we evaluate this 
+d1 $ s "hh"
+you can clearly hear that the first kickdrum sample is no longer played and gets substitued with an hihat sample.
+This is very useful when doing a live performance since it let us gives new instructions to our system without having to worry to stop the previous patterns.
+If we want to hear the two patterns one on top of each other we can do like this
+
+d1 $ s "bd"
+
+d2 $ s "hh"
+
+and even better we could add a pause to the second pattern, the pause in Tidal is written using the tilde character wich is alt+5 (at least on my keyboard)
+
+d2 $ s "~ hh"
+
+so now they don't play simultaniusly, we will explain more of this later.
+
+
+That's it for today, check the next tutorial to discover how to write complex patterns inside Tidal.
+
+
