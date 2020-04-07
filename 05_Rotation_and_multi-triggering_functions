@@ -9,7 +9,7 @@ striate
 
 Hello World, welcome to our new tutorial on Tidalcycles. 
 
-Last time we talked about functions and learnt the basic ones: fast, slow, rev and palindrome. 
+Last time we talked about functions and learnt the basic ones: fast, slow, every, rev and palindrome. 
 Today we are going to focus on rotation and learn some other functions.
 
 So, what's rotation? This technique is borrowed from the tradition of classical counterpoint and it's based on the idea of shifting patterns in time.
@@ -27,7 +27,7 @@ d2 $ (0.25 ~>) $ s "bd cp bin ~"
 
 We shifted the second pattern of 25% to the right. The argument is a float number from 0 to 1. 
 That means that the pattern is actually "~ bd cp bin". So when d1 is playing bd, d2 is on a rest, then d1 plays cp and d1 plays bd and so on.
-Note that differently from other functions, such as fast and slow, the shifting function is all enclosed in round brackets, 
+Note that differently from other functions, such as every, the shifting function is all enclosed in round brackets, 
 instead of enclosing only the argument, and that we have to write the argument BEFORE the function. 
 
 We can also rotate to the left: 
@@ -47,15 +47,51 @@ We can use the rot function:
 
 d1 $ rot 1 $ s "bd cp bin ~"
 
-In this way we have shifted every element to the place of the next one on the right, aside from rests. 
-So now our pattern is "bin bd cp ~". 
+In this way we have shifted every element to the place of the next one on the left, aside from rests. 
+So now our pattern is "cp bin bd". 
 Differently from the shift function, rot has an integer value as an argument, equal to the number of shifts to the right every element will do.
 
-If we want to rotate left, there's the rotL function:
+Now we are going to try to write the Clapping Music score as code. First of all we need to write the pattern that needs to be shifted.
+The pattern is made of 12 notes. Instead of writing down the name of the sample each time, we are going to use a very interesting function called struct.
 
-d1 $ rotL 1 $ s "bd cp bin ~"
+We will get more in depth with struct in future tutorials, for the moment I will just say that structs allows to write boolean patterns.
+Boolean patterns are made of True and False conditions, which we can represent as 1 and 0. 
+In the pattern we will give to struct, 1 will be equal to a triggered sample and 0 will be a rest: 
 
-Now our pattern is "cp bin bd ~"
+d1 $ struct ("t t t f t t f t f t t") $ s "bin"
+
+In this way we pass the bin sound to the struct pattern, playing the sample only when there's a 1. 
+Now, the overlapped pattern in Clapping Music is the same pattern but it gets shifted of 1 to the right every 12 cycles. 
+We cannot use the rot function, because it would preserve the position of rests, giving the same pattern each time. 
+So we will use the shift function. 
+We are going to shift of a varying number divided by twelve.
+
+d2 $ ( "[<1 2 3 4 5 6 7 8 9 10 11 12>]/12" <~)
+
+Then we also need to make that the shifting value doesn't change every time, but every 12. 
+We cannot use the every function, because it would apply the changed value only every 12, instead of keeping it. 
+We will simply divide the pattern by 12, so that it is slowed down. 
 
 
+d2 $ (("[<1 2 3 4 5 6 7 8 9 10 11 12>]/12"/12) <~)
 
+Then we need to apply the rotation to the pattern. 
+
+d2 $ (("[<1 2 3 4 5 6 7 8 9 10 11 12>]/12"/12) <~) 
+$ struct ("t t t f t t f t f t t") 
+$ s "bin"
+
+In the original score, the pattern that doesn't change has a piano dynamic, while the shifting one is forte. 
+We will do that reducing the gain of the first one - we will see that in depth in the future, for the moment let's write this: 
+
+d1 $ struct ("t t t f t t f t f t t") $ s "bin" # gain 0.75
+
+
+d2 $ (("[<1 2 3 4 5 6 7 8 9 10 11 12>]/12"/12) <~) 
+$ struct ("t t t f t t f t f t t") 
+$ s "bin"
+
+
+So here's our Clapping Music on Tidal. 
+
+That's all for today, see you soon for the next tutorial. Bye!
