@@ -1,7 +1,7 @@
 
 
 degrade /degradeBy
-sometimesBy (sometimes, always, often, almostNever)
+sometimesBy (sometimes, always, often, almostNever, someCycles, someCyclesBy)
 jux
 stutWith
 whenmod
