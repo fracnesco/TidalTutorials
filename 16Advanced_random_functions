@@ -1,0 +1,5 @@
+discrete vs continuous random (rand / irand) 
+permutations -> shuffle and scramble
+set of possibilities -> choose
+weighted random -> wChoose
+combine conditionals with random -> ifp + whatever random function
