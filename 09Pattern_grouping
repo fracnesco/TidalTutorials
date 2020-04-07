@@ -1,3 +1,9 @@
 
 
 stack, cat, slowcat, randcat, append, fastAppend, spread, fastSpread, spreadChoose
+
+cat, slowcat, randcat
+stack
+append, fastAppend
+wedge
+spread, fastSpread, spreadChoose
