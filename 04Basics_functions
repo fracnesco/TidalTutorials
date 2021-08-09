@@ -1,5 +1,75 @@
 
 
-fast, slow, degrade, degradeBy, chop, striate, rev, palindrome, stut
+topics: fast, slow, rev, palindrome, every
 
-every
+
+Hello World, welcome to our new tutorial on Tidalcycles. 
+
+Today we are going to introduce the most common and useful functions. 
+
+Tidal is written in Haskell, a pure functional programming language; that means that almost everything in the language is a function. 
+
+Functions are used to manipulate and organize patterns. Let's see an example on how they work. 
+As we have seen in previous tutorial, this is a very simple pattern.
+
+d1 $ s "bd sn hh sn"
+
+Now, we are going to add our first function to modify the behavior of the pattern.
+
+d1 $ rev $ s "bd sn hh sn"
+
+As we can hear, the rev function reverses the pattern, so that now the samples are reproduced in this order: sn, hh, sn, bd.
+
+Note that we wrote the rev function BEFORE the pattern. Why? 
+Because starting from the main pattern, which in this case is s "bd", Tidalcycles goes from right to left. 
+We already explained the $ operator: it takes data from the right side and passes it on the left. On the left there has to be a function.
+
+It may seem a bit tricky to write a pattern and then add functions on the left of it, but it's just a matter of practice and you'll get used to it very fast.
+
+Now let's discover some other simple functions that almost every Tidalcycles coder use every day.
+
+d1 $ fast 2 $ s "bd sn hh sn"
+
+
+As we can hear, the "fast" function speeds up a pattern according to a factor we give as an argument. 
+Most of the functions in Tidalcycles have one or more arguments we need to specify in order to make it work. 
+
+d1 $ slow 4 $ s "bd sn hh sn"
+
+Obviously slow has the opposite effect of fast. 
+We can also use float numbers as arguments for these functions. 
+
+d1 $ slow 0.5 $ s "bd sn hh sn
+
+Note that slow 0.5 has the same effect of fast 2. 
+
+Instead of writing a number as an argument, we can write a pattern.
+
+d1 $ fast "2 0.5" $ s "bd sn hh sn"
+
+What happen here is that for the first half of the cycle the time is twice faster to the normal cycle speed, then for the second half it is twice slower. 
+
+d1 $ fast "2 0.75 0.5" $ s "bd sn hh sn"
+
+The pattern we wrote for the fast function is somewhat a secondary pattern comparing to the one on the right. It means that it inherits the subdivision of the cycle defined from the main pattern. Try to experiment with that a little bit and you'll get an idea on how it works. Generally speaking, if we have an even distribution of the cycle in the main pattern, such as four elements, we will get irregular results from the use of an odd subdivision in a secondary pattern, such as three. This means that the secondary pattern is quantized according to the main one, because the application of the function is updated only when an element of the latter occurs.  
+
+Let's continue with some other useful patterns. 
+
+d1 $ palindrome $ s "bd sn hh sn"
+
+Palindrome reverses the pattern only every two cycles. So the first time the pattern is regular, the second time it is reversed, and so on. 
+
+This is same as writing:
+
+d1 $ every 2 rev $ s "bd sn hh sn"
+
+We just introduced what is probably the most widely used function: every.  Every applies a certain function only every a certain number of cycles according to its first argument. Its second argument is the function that has to be applied. We can apply whatever function we want:
+
+d1 $ every 2 (fast 2) $ s "bd sn hh sn"
+
+Note that whenever a nested function requires an argument, the function has to be put into round brackets. 
+It can also have a pattern instead of an argument as well. 
+
+d1 $ every 2 (fast "2 0.5") $ s "bd sn hh sn" 
+
+We will go more in depth into interesting functions in the next tutorial. 

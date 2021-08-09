@@ -1,0 +1,5 @@
+
+
+n, speed, pan, gain, room, lpf, hpf, vowel, attack, release, legato, shape
+
+modulation with continuous signals (rand, sine, tri, saw, isaw, square) + range + irand for discrete random
