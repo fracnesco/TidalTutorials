@@ -2,11 +2,11 @@ Hello world welcome to our second tutorial on Tidalcycles
 
 In this tutorial we will explain some of the fundamentals of Tidal and start to write our very first pattern.
 
-Let's start from this line of code wich is one of the simplest things you can write inside Tidal
+Let's start from this line of code which is one of the simplest things you can write inside Tidal
 
 d1 $ sound "bd"
 
-The first part highlited in blue is d1 wich represent a connection between Tidal and SuperDirt, we can also think d1 as the first channel inside SuperDirt while d2 represent the second one and so on.
+The first part highlited in blue is d1 which represent a connection between Tidal and SuperDirt, we can also think d1 as the first channel inside SuperDirt while d2 represent the second one and so on.
 
 The second character is the dollar, to explain how the dollar works inside Tidal and Haskell you can consider that this two are the same
 
@@ -19,13 +19,13 @@ a $ b $ c = a (b (c))
 
 What the dollar does is indicating that everything that follows is the last argument of the function preceding it, if this sounds confusing at first don't worry.
 
-In the last part of our code we have the keyword sound (that can be also shortened with just s) that is telling the program that what follows is a pattern (wich in our case is "bd") that is written inside quotes.
+In the last part of our code we have the keyword sound (that can be also shortened with just s) that is telling the program which instrument/sample to play (which in our case is "bd") that is written inside quotes.
 
-When we write a pattern using Tidal we recall samples that are stored in a directory (this directory is definied when booting SuperDirt and has a default path that can be changed customizing your SuperDirt start up code). To access this directory you can type and evaluate the command Quarks.gui inside SuperCollider, then click on Dirt Samples and then on Open Folder.
+When we write a pattern using Tidal we recall samples that are stored in a directory (this directory is defined when booting SuperDirt and has a default path that can be changed customizing your SuperDirt start up code). To access this directory you can type and evaluate the command Quarks.gui inside SuperCollider, then click on Dirt Samples and then on Open Folder.
 
 When we opend this directory we can se that the bd sample we recalled is not a single samples but instead a folder of samples. When we write just "bd" we are recalling the first samples, we could recal the second one using the synthax "bd:01" where :01 is used to give the index of the samples inside the directory starting from 0, so that "bd" and "bd:00" are the same.
 
-So now that we have analyzed our very first line of code inside Tidal let's clarify a few other important concepts before explaning how to write our patterns.
+So now that we have analyzed our very first line of code inside Tidal let's clarify a few other important concepts before explaining how to write our patterns.
 
 To evaluate a line of code inside Tidal we can press shit+enter, if you try that on our first example
 d1 $ sound "bd"
@@ -48,7 +48,7 @@ Writing code on multiple lines and using the dollar instead of parenthesis (when
 Another key concept inside Tidal is that messages sent to the same channel (d1,d2, ecc) ovveride the previous code while giving the new instructions.
 So for example if we evaluate this portion of code
 d1 $ s "bd"
-and we evaluate this 
+and we evaluate this
 d1 $ s "hh"
 you can clearly hear that the first kickdrum sample is no longer played and gets substitued with an hihat sample.
 This is very useful when doing a live performance since it let us gives new instructions to our system without having to worry to stop the previous patterns.
@@ -62,9 +62,7 @@ and even better we could add a pause to the second pattern, the pause in Tidal i
 
 d2 $ s "~ hh"
 
-so now they don't play simultaniusly, we will explain more of this later.
+so now they don't play on the same beat, we will explain more of this later.
 
 
 That's it for today, check the next tutorial to discover how to write complex patterns inside Tidal.
-
-
